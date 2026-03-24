@@ -2,3 +2,14 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Adicione isso ao styles.css no src/ */
+.snackbar-sucesso .mdc-snackbar__surface {
+  background-color: #2bbe68; /* Cor de fundo */
+  color: white; /* Cor do texto */
+}
+
+.snackbar-erro .mdc-snackbar__surface {
+  background-color: #ff3737;
+  color: white;
+}

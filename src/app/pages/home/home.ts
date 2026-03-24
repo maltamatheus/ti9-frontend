@@ -3,8 +3,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { AuthenticationServices } from '../../services/authentication-services';
-import { Router } from '@angular/router';
+import { AuthenticationServices } from '../../services/authentication-services.service';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
+    RouterLink
 ],
   templateUrl: './home.html',
   styleUrl: './home.css',
@@ -23,21 +24,24 @@ constructor(private authenticationServices: AuthenticationServices,
 ) {}
 
   ngOnInit(): void {
-    console.log('Home component initialized');
-
   }
 
   deslogar() {
-    this.authenticationServices.deslogar().subscribe(
-      response => {
-        console.log('Resposta do servidor ao deslogar:', response);
+    // this.authenticationServices.deslogar().subscribe(
+    //   response => {
+    //     console.log('Resposta do servidor ao deslogar:', response);
         // Redirecionar para a página de login ou outra ação após o logout
+        console.log("Sessão encerrada");
         this.router.navigate(['/login']);
-      },
-      error => {
-        console.error('Erro ao deslogar:', error);
-        // Tratar erros de logout, se necessário
-      }
-    );
+      // },
+      // error => {
+      //   console.error('Erro ao deslogar:', error);
+      //   // Tratar erros de logout, se necessário
+      // }
+    // );
+  }
+
+  rotateTo(rota: string) {
+    this.router.navigate([`/${rota}`]);
   }
 }

@@ -14,6 +14,50 @@ mat-card {
   margin-bottom: 15px;
 }
 
-.campo-input{
+.titulo-form {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 25px 0px;
+}
+
+.campo-input-esquerdo{
   width: 30%;
+  padding-right: 2.5%;
+  padding-left: 25px;
+}
+.campo-input-central{
+  width: 30%;
+  /* padding-left: 2.5%; */
+  /* padding-right: 2.5%; */
+}
+
+.campo-input-direito{
+  width: 30%;
+  padding-left: 2.5%;
+}
+
+.observacoes {
+  width: 93%;
+  padding-left: 25px;
+}
+
+.exp-panel-endereco {
+  padding-left: 25px;
+  width: 95%;
+}
+
+mat-expansion-panel-header {
+  background-color: #e0e0e0;
+  height: 60px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+mat-expansion-panel-header:hover {
+  background-color: #e0e0e0 !important;
+}
+
+::ng-deep mat-expansion-panel-body {
+  padding: 16px !important;
+  background-color: #e0e0e0 !important;
 }

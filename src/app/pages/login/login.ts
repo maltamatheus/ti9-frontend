@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
-import { AuthenticationServices } from '../../services/authentication-services';
+import { AuthenticationServices } from '../../services/authentication-services.service';
 
 @Component({
   selector: 'app-login',
@@ -37,12 +37,12 @@ export class Login implements OnInit {
     if (this.loginForm.valid) {
       console.log('Dados de login:', this.loginForm.value);
       // Chamar serviço de autenticação aqui
-      this.authService.logar(this.loginForm.value.login, this.loginForm.value.password).subscribe(
-        response => {
-          console.log('Resposta do servidor:', response);
+      // this.authService.logar(this.loginForm.value.login, this.loginForm.value.password).subscribe(
+      //   response => {
+      //     console.log('Resposta do servidor:', response);
       this.router.navigate(['/home']);
-        }
-      );
+        // }
+      // );
     }
   }
 

@@ -2,10 +2,10 @@
 <div class="container-cadastro">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Cadastro de Usuário</mat-card-title>
+      <mat-card-title class="titulo-form">{{ tituloForm }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="cadastroForm" (ngSubmit)="cadastrar()">
+      <form [formGroup]="cadastroUsuario" (ngSubmit)="cadastrar()">
         <mat-form-field appearance="fill" class="campo-input" style="padding-right: 2.5%;">
           <mat-label>Login</mat-label>
           <input matInput formControlName="login">
@@ -13,7 +13,7 @@
 
         <mat-form-field appearance="fill" class="campo-input" style="padding-left: 2.5%;padding-right: 2.5%;">
           <mat-label>Selecione um Perfil de Usuário</mat-label>
-              <mat-select formControlName="perfil">
+              <mat-select formControlName="role">
                 @for (perfil of tiposUsuario; track perfil) {
                   <mat-option [value]="perfil">{{ perfil }}</mat-option>
                 }
@@ -22,11 +22,11 @@
 
         <mat-form-field appearance="fill" class="campo-input" style="padding-left: 2.5%;">
           <mat-label>Senha</mat-label>
-          <input matInput formControlName="senha" type="password">
+          <input matInput formControlName="password" type="password">
         </mat-form-field>
 
         <mat-card-actions>
-          <button mat-raised-button color="primary" type="submit" [disabled]="!cadastroForm.valid">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!cadastroUsuario.valid">
             Cadastrar
           </button>
         </mat-card-actions>

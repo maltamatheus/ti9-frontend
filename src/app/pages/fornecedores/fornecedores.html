@@ -2,31 +2,106 @@
 <div class="container-cadastro">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Cadastro de Fornecedores</mat-card-title>
+      <mat-card-title class="titulo-form">{{ tituloForm }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="cadastroForm" (ngSubmit)="cadastrar()">
-        <mat-form-field appearance="fill" class="campo-input" style="padding-right: 2.5%;">
-          <mat-label>Login</mat-label>
-          <input matInput formControlName="login">
+      <form [formGroup]="cadastroFornecedores" (ngSubmit)="cadastrar()">
+        <mat-form-field appearance="fill" class="campo-input-esquerdo">
+          <mat-label>Codigo</mat-label>
+          <input matInput formControlName="codigo" maxlength="10" placeholder="Máx 10 caracteres...">
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="campo-input" style="padding-left: 2.5%;padding-right: 2.5%;">
-          <mat-label>Selecione um Perfil de Usuário</mat-label>
-              <mat-select formControlName="perfil">
-                @for (perfil of tiposUsuario; track perfil) {
-                  <mat-option [value]="perfil">{{ perfil }}</mat-option>
+        <mat-form-field appearance="fill" class="campo-input-central">
+          <mat-label>Razão Social</mat-label>
+          <input matInput type="text" formControlName="razaoSocial" minlength="3" placeholder="Mín 3 caracteres...">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="campo-input-direito">
+          <mat-label>CNPJ</mat-label>
+          <input matInput type="text" appSomenteNumeros formControlName="cnpj" maxlength="14" placeholder="Somente números...">
+          @if (this.cadastroFornecedores.get('cnpj')?.hasError('minlength')) {
+            <mat-error><strong>CNPJ: 14 dígitos</strong></mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="campo-input-esquerdo">
+          <mat-label>Selecione um Tipo de Fornecedor</mat-label>
+              <mat-select formControlName="tipoFornecedor">
+                @for (tipo of tiposFornecedor; track tipo) {
+                  <mat-option [value]="tipo">{{ tipo }}</mat-option>
                 }
               </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="campo-input" style="padding-left: 2.5%;">
-          <mat-label>Senha</mat-label>
-          <input matInput formControlName="senha" type="password">
+        <mat-form-field appearance="fill" class="campo-input-central">
+          <mat-label>Segmento</mat-label>
+          <input matInput formControlName="segmento">
         </mat-form-field>
 
+        <mat-form-field appearance="fill" class="campo-input-direito">
+          <mat-label>Informe o Porte</mat-label>
+          <mat-select formControlName="porte">
+            @for (porte of listaPortes; track porte) {
+              <mat-option [value]="porte">{{ porte }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <div class="exp-panel-endereco">
+          <mat-accordion>
+              <mat-expansion-panel [hideToggle]="false">
+                  <mat-expansion-panel-header>Endereço</mat-expansion-panel-header>
+                    <app-enderecos [cadastroEndereco]="getFormEndereco()"></app-enderecos>
+              </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+
+        <mat-form-field appearance="fill" class="campo-input-esquerdo" style="width: 20% !important;padding-right: 0.5% !important;margin-top: 25px;">
+          <mat-label>Telefone</mat-label>
+          <input matInput type="text" appSomenteNumeros formControlName="telefone" maxlength="11"
+          placeholder="Somente números...">
+          @if (this.cadastroFornecedores.get('telefone')?.hasError('minlength')) {
+            <mat-error><strong>Telefone: DDD + números</strong></mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="campo-input-central"
+        style="width: 25% !important;  padding-left: 0.5% !important;padding-right: 0.5% !important;">
+          <mat-label>E-mail</mat-label>
+            <input matInput formControlName="email" type="email">
+              @if (this.cadastroFornecedores.get('email')?.hasError('email')) {
+                <mat-error>Por favor, informe <strong>E-mail válido</strong></mat-error>
+              }
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="campo-input-direito"
+        style="padding-left: 0.5% !important;">
+          <mat-label>Site</mat-label>
+          <input matInput formControlName="site">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="campo-input-direito"
+        style="padding-left: 1% !important;width: 15%;">
+          <mat-label>Risco</mat-label>
+          <mat-select formControlName="categoriaRisco">
+            @for (categoria of listaCategoriaRisco; track categoria) {
+              <mat-option [value]="categoria">{{ categoria }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <div>
+          <mat-form-field appearance="fill" class="observacoes">
+            <mat-label>Observações</mat-label>
+              <textarea matInput
+                        formControlName="observacoes"
+                        rows="3">
+                      </textarea>
+          </mat-form-field>
+        </div>
+
         <mat-card-actions>
-          <button mat-raised-button color="primary" type="submit" [disabled]="!cadastroForm.valid">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!cadastroFornecedores.valid" style="margin-top: 20px;">
             Cadastrar
           </button>
         </mat-card-actions>

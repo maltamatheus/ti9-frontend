@@ -17,3 +17,9 @@ mat-card {
 .campo-input{
   width: 30%;
 }
+
+.titulo-form {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 25px 0px;
+}
